@@ -13,16 +13,15 @@
 <body>
   <div id="container fliuid">
 		<div class="row">
-      <!--Social media -->
 			<div class="col-sm-9">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
               <a class="navbar-brand" href="index.php">WriteNow!</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">WriteNow Forum</a></li>
-              <li><a href="#">Topics</a></li>
-              <li><a href="#">Categories</a></li>
+              <li class="active"><a href="landing_page.php">WriteNow Forum</a></li>
+              <li><a href="create_cat.php">Categories</a></li>
+              <li><a href="create_topic.php">Topics</a></li>
               <li><a href="#">Page 3</a></li>
             </ul>
         </nav>

@@ -90,7 +90,7 @@ else
                         $_SESSION['user_level'] = $row['user_level'];
                       }
 
-                    echo 'Welcome, ' . $_SESSION['user_name'] . ' <a href="landing_page.php">Proceed to the forum overview</a>.';
+                    header('Location: signedIn.php');
 
             }
 }
