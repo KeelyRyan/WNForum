@@ -13,36 +13,30 @@
 <body>
   <div id="container fliuid">
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-sm-12">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
               <a class="navbar-brand" href="index.html">WriteNow!</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="landing_page.php">WriteNow Forum</a></li>
+              <li><a href="landing_page.php">WriteNow Forum</a></li>
               <li><a href="create_cat.php">Categories</a></li>
               <li><a href="create_topic.php">Topics</a></li>
             </ul>
         </nav>
       </div>
-      <div class="col-sm-3">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-              <a><?php
-              session_start();
+      </div>
 
-              if(isset($_SESSION['signed_in']) == true)
-              {
-
-                echo 'Hello ' . $_SESSION['user_name'] . '. Not you? <a href="signout.php">Sign out</a>';
-              }
-              else
-              {
-                echo '<a href="signin.php">Sign in</a> or <a href="create_account.php">Create an account</a>.';
-              }
-              ?></a>
-            </div>
-        </nav>
+    </div>
+    <div id="footer">
+            <div class="row">
+            <div class="col-sm-12 text-center">
+              <nav class="navbar navbar-default"
+            <p>&#169; Keely Anne Ryan</p>
+               <p>K00223358</p>
+         </nav>
+        </div>
       </div>
     </div>
-<div id="content">
+    </body>
+    </html>
