@@ -6,8 +6,6 @@ include 'views/header.php';
 //first select the category based on $_GET['cat_id']
 
 $cat_id=$conn->real_escape_string($_GET['id']);
-
-
 $sql = "SELECT
             cat_id,
             cat_name,
@@ -45,7 +43,9 @@ else
                     topic_date,
                     topic_cat_id
                 FROM
-                    topics inner join categories on topics.topic_cat_id = categories.cat_id";
+                    topics inner join categories on topics.topic_cat_id = categories.cat_id
+                WHERE
+                    topic_cat_id = $cat_id";
 
 
         $result = mysqli_query($conn, $sql);

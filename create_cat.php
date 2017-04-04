@@ -2,7 +2,7 @@
 //create_cat.php
 include 'connect.php';
 include 'views/header.php';
-if(isset($_POST['user_level'])==true){
+if(isset($_SESSION['user_level'])==true){
 if ($_SESSION['user_level']==1){
   if(isset($_POST['cat_description']))
   {

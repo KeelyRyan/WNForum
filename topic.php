@@ -3,8 +3,6 @@
 include 'connect.php';
 include 'views/header.php';
 
-
-
 $topic_id=$conn->real_escape_string($_GET['id']);
 
 $post_topic = $conn->real_escape_string($_GET['id']);
@@ -34,13 +32,14 @@ else
         //do a query for the topics
         $post_topic = $conn->real_escape_string($_GET['id']);
     while($row = mysqli_fetch_assoc($result)) {   $topic_subject = $row['topic_subject'];}
-        $sql = "SELECT
+  $sql = "SELECT
 	posts.post_topic_id,
     posts.post_content,
     posts.post_date,
     posts.posted_by,
     users.user_id,
-    users.user_name
+    users.user_name,
+    topics.topic_subject
 FROM
     posts
 inner JOIN
@@ -91,50 +90,43 @@ WHERE
 
 }
 include 'forms/reply.html';
+if($_SERVER['REQUEST_METHOD'] != 'POST')
+{
+//someone is calling the file directly, which we don't want
+echo 'This file cannot be called directly.';
+}
+else
+{
+//check for sign in status
+if(isset($_SESSION['signed_in'])==false)
+{
+    echo '<h4>You must be signed in to post a reply.</h4>';
+}
+else
+{
+    //a real user posted a real reply
+    $sql = "INSERT INTO
+                posts(post_content,
+                      post_date,
+                      post_topic_id,
+                      posted_by)
+            VALUES ('" . $_POST['reply_content'] . "',
+                    NOW(), $topic_id,
+                    " . $_SESSION['user_id'] . ")";
 
-    //check for sign in status
-    if(!$_SESSION['signed_in'])
+    $result = mysqli_query($conn,$sql);
+
+    if(!$result)
     {
-        echo 'You must be signed in to post a reply.';
+        echo 'Your reply has not been saved, please try again later.';
     }
     else
     {
-      if(isset($_POST['cat_description']))
-      {
-      $topic_id= $conn->real_escape_string($_GET['id']);
-      $content=$conn->real_escape_string($_POST['reply_content']);
-      $user_id=$_SESSION['user_id'];
-        //a real user posted a real reply
-        $sql = "INSERT INTO
-                    posts(post_content,
-                          post_date,
-                          post_topic_id,
-                          posted_by)
-
-                VALUES ('$content',
-                        NOW(),
-                        $topic_id,
-                        $user_id)";
-
-                        if(!$result)
-                        {
-                            //Error
-                            echo 'An error occured while inserting your post. Please try again later.' . mysqli_error($conn);
-                            $sql = "ROLLBACK;";
-                            $result = mysqli_query($conn, $sql);
-                        }
-                        else
-                        {
-                            $sql = "COMMIT;";
-                            $result = mysqli_query($conn, $sql);
-
-                            echo 'You have successfully created <a href="topic.php?id='. $topicid . '">back to topic</a>.';
-                        }
-
-      }
+        echo 'Your reply has been saved, check out <a href="topic.php?id=' . htmlentities($_GET['id']) . '">the topic</a>.';
     }
-
-}}}
+}
+}}
+}}
 
 include 'views/footer.php';
 
