@@ -45,6 +45,7 @@ body {
 
 /* begin table styles */
 table {
+
     border-collapse: collapse;
     width: 100%;
 }
@@ -61,6 +62,7 @@ table a:hover {
 th {
     background-color: #3498DB;
     color: #F0F0F0;
+    text-align: right;
 }
 
 td {

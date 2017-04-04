@@ -31,8 +31,10 @@
             <div class="navbar-header">
               <a><?php
               session_start();
-              if($_SESSION['loggedin'])
+
+              if(isset($_SESSION['logged_in']) == true)
               {
+
                 echo 'Hello ' . $_SESSION['user_name'] . '. Not you? <a href="signout.php">Sign out</a>';
               }
               else

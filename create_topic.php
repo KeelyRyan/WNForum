@@ -4,10 +4,10 @@ include 'connect.php';
 include 'views/header.php';
 
 echo '<h2>Create a topic</h2>';
-if($_SESSION['signed_in'] == false)
+if(isset($_SESSION['signed_in']) == false)
 {
     //the user is not signed in
-    echo 'Sorry, you have to be <a href="/forum/signin.php">signed in</a> to create a topic.';
+    echo '<h4>Sorry, you have to be <a href="/forum/signin.php">signed in</a> to create a topic.</h4>';
 }
 else
 {
@@ -57,8 +57,9 @@ else
                         echo '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
                     }
                 echo '</select>';
-
-                echo 'Message: <textarea name="post_content" /></textarea>
+                  echo '<br>';
+                echo 'Message: <br>';
+                echo '<textarea name="post_content" /></textarea> <br>
                     <input type="submit" value="Create topic" />
                  </form>';
             }
@@ -72,14 +73,11 @@ else
 
         if(!$result)
         {
-            //Damn! the query failed, quit
             echo 'An error occured while creating your topic. Please try again later.';
         }
         else
         {
-
-            //the form has been posted, so save it
-            //insert the topic into the topics table first, then we'll save the post into the posts table
+            //Insert the topic into the topics table first
             $topic_subject=$conn->real_escape_string($_POST['topic_subject']);
             $topic_cat=$conn->real_escape_string($_POST['topic_cat']);
             $user_name =$_SESSION['user_id'];
@@ -93,29 +91,32 @@ else
             $result = mysqli_query($conn, $sql);
             if(!$result)
             {
-                //something went wrong, display the error
-                echo 'here? An error occured while inserting your data. Please try again later.' . mysqli_error($conn);
+                //Error, roll back
+                echo 'An error occured while inserting your data. Please try again later.' . mysqli_error($conn);
                 $sql = "ROLLBACK;";
                 $result = mysqli_query($conn, $sql);
             }
             else
             {
-                //the first query worked, now start the second, posts query
-                //retrieve the id of the freshly created topic for usage in the posts query
+                //Second query, retrieve the id of the just created topic to use in the posts query
                 $topicid = mysqli_insert_id($conn);
                 $post_content=$conn->real_escape_string($_POST['post_content']);
                 $user_name =$_SESSION['user_id'];
+
+
                 $sql = "INSERT INTO
                             posts(post_content,
                                   post_date,
-                                  posted_by)
+                                  posted_by,
+                                  post_cat_id,
+                                  post_topic_id)
                         VALUES
-                            ('$post_content', NOW(), '$user_name')";
+                            ('$post_content', NOW(), '$user_name','$topic_cat',$topicid)";
                 $result = mysqli_query($conn, $sql);
 
                 if(!$result)
                 {
-                    //something went wrong, display the error
+                    //Error
                     echo 'An error occured while inserting your post. Please try again later.' . mysqli_error($conn);
                     $sql = "ROLLBACK;";
                     $result = mysqli_query($conn, $sql);
@@ -125,7 +126,6 @@ else
                     $sql = "COMMIT;";
                     $result = mysqli_query($conn, $sql);
 
-                    //after a lot of work, the query succeeded!
                     echo 'You have successfully created <a href="topic.php?id='. $topicid . '">your new topic</a>.';
                 }
             }
