@@ -2,7 +2,7 @@
 //create_cat.php
 include 'connect.php';
 include 'views/header.php';
-
+echo '<div class="row"> <div class="col-sm-6">';
 if(isset($_SESSION['user_level'])==true){
 if ($_SESSION['user_level']==1){
   if(isset($_POST['cat_description']))
@@ -19,7 +19,7 @@ $cat_description=$conn->real_escape_string($_POST['cat_description']);
     }
     else
     {
-        echo 'New category successfully added.';
+        echo 'New category successfully added. <br>';
     }
 }
 }
@@ -35,5 +35,7 @@ else
 {
     echo '<h3> Sorry, you need to a <a href="signin.php">signed in</a> administrator <a href="/forum/create_account.php">to create a category.</a>! </h3> ';
 }
+
+echo '</div> <div class="col-sm-6"> <img src="images/logo.png" alt="Write Now logo"> </div></div>';
 include 'views/footer.php';
 ?>

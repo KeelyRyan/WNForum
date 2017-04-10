@@ -8,7 +8,10 @@ include 'functions/helperFunctionsTables.php';
 unset($_SESSION['loggedin']);
 $_SESSION['loggedin'] = "false";
 
-echo '<h3>Sign in</h3>';
+echo '<div class="row">
+<div class="col-sm-6">';
+
+echo '<h3>Sign in </h3> <br>';
 
 //first, check if the user is already signed in. If that is the case, there is no need to display this page
 if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
@@ -72,7 +75,6 @@ else
                     //set the $_SESSION['signed_in'] variable to TRUE
                     $_SESSION['signed_in'] = true;
 
-
                     //Add the user_id and user_name values in the $_SESSION
                     while($row = mysqli_fetch_assoc($result))
                     {
@@ -88,6 +90,8 @@ else
 
         }
     }
+    echo '</div>';
+    echo '<div class="col-sm-6"> <img src="images/logo.png" alt="Write Now logo"> </div></div>';
 
 include 'views/footer.php';
 ?>

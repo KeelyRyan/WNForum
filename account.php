@@ -34,11 +34,31 @@ if($row['user_level']==1){
     else {
       $level = "User";
   }
-  echo '<h5>'.$fname . ' ' .$surname .'</h5>';
-  echo '<h5>Username: '.$user_name.' </h5>';
-  echo '<h5>User level: '.$level.' </h5>';
-  echo '<h5>E-mail address: '.$email.' </h5>';
-  echo '<h5>Joined community on: '.$user_date.' </h5>';
+  echo '<h5><b>'.$fname . ' ' .$surname .' </b></h5>';
+  echo '<hr>';
+  echo '<div class="row">';
+  echo '<div class="col-sm-6">';
+  echo '<div class="row">
+  <div class="col-sm-6">
+  <dl>
+  <dt><h5><b>Username: </b> </dt> <dd>'.$user_name.' </h5></dd></div>';
+  echo '<div class="col-sm-6">
+  <dt><h5><b>User level:</b> </dt> <dd> '.$level.' </h5></dd></div></div>';
+  echo '<div class="row">
+  <div class="col-sm-6">
+  <dt><h5><b>E-mail address:</b> </dt> <dd>'.$email.' <a href="editEmail.php"><u>update</u></a>.</h5></dd></div> ';
+  echo '<div class="col-sm-6">
+  <dt><h5><b>Joined community on:</b> </dt> <dd>'.$user_date.' </h5> </dd></dl></div></div>';
+  echo '<div class="row">
+  <div class="col-sm-6">
+  <br><h5><b>Update Password: </b>Click <a href="editPass.php"><u>here</u></a>. </h5> </div>';
+  echo '<div class="col-sm-6">
+  <br><h5><b>Cancel Account: </b>Click <a href="deleteAcc.php"><u>here</u></a>. </h5> </div>';
+  echo '</div> </div>';
+  echo '<div class="col-sm-6">
+  <img src="images/logo.png" alt="Write Now logo">
+  </div></div>';
+
 
 }
 }
