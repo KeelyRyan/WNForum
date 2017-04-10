@@ -55,17 +55,16 @@ if($row['user_level']==1){
   echo '<div class="col-sm-6">
   <br><h5><b>Cancel Account: </b>Click <a href="deleteAcc.php"><u>here</u></a>. </h5> </div>';
   echo '</div> </div>';
-  echo '<div class="col-sm-6">
-  <img src="images/logo.png" alt="Write Now logo">
-  </div></div>';
 
-
-}
-}
+    }
+  }
 }
 else
 {
     echo '<h3> Sorry, you need to <a href="signin.php">signed in</a> or <a href="/forum/create_account.php">create an account</a> to access this area! </h3> ';
 }
+echo '<div class="col-sm-6">
+<img src="images/logo.png" alt="Write Now logo">
+</div></div>';
 include 'views/footer.php';
 ?>

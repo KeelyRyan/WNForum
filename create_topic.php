@@ -3,15 +3,16 @@
 include 'connect.php';
 include 'views/header.php';
 
+echo '<div class="row"> <div class="col-sm-6">';
 
 if(isset($_SESSION['signed_in']) == false)
 {
     //the user is not signed in
-    echo '<h3> Sorry, you need to <a href="signin.php">signed in</a> or <a href="/forum/create_account.php">create an account</a> to create a topic! </h3> ';
+    echo '<h3> Sorry, you need to <a href="signin.php">sign in</a> or <br><a href="/forum/create_account.php">create an account</a> to create a topic! </h3> ';
 }
 else
 {
-  echo '<h2>Create a topic</h2>';
+  echo '<h2>Create a Topic</h2>';
     //the user is signed in
     if($_SERVER['REQUEST_METHOD'] != 'POST')
     {
@@ -133,6 +134,9 @@ else
         }
     }
 }
+echo '</div>
+<br><br><br>
+<div class="col-sm-6"> <img src="images/logo.png" alt="Write Now logo"> </div></div>';
 
 include 'views/footer.php';
 ?>
