@@ -3,14 +3,15 @@
 include 'connect.php';
 include 'views/header.php';
 
-echo '<h2>Create a topic</h2>';
+
 if(isset($_SESSION['signed_in']) == false)
 {
     //the user is not signed in
-    echo '<h4>Sorry, you have to be <a href="/forum/signin.php">signed in</a> to create a topic.</h4>';
+    echo '<h3> Sorry, you need to <a href="signin.php">signed in</a> or <a href="/forum/create_account.php">create an account</a> to create a topic! </h3> ';
 }
 else
 {
+  echo '<h2>Create a topic</h2>';
     //the user is signed in
     if($_SERVER['REQUEST_METHOD'] != 'POST')
     {

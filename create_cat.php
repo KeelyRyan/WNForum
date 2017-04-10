@@ -2,6 +2,7 @@
 //create_cat.php
 include 'connect.php';
 include 'views/header.php';
+
 if(isset($_SESSION['user_level'])==true){
 if ($_SESSION['user_level']==1){
   if(isset($_POST['cat_description']))
@@ -32,7 +33,7 @@ include 'forms/new_category.html';
 }
 else
 {
-    echo '<h3> Sorry, you have to be <a href="/forum/signin.php">signed in</a> to access this area! </h3> ';
+    echo '<h3> Sorry, you need to a <a href="signin.php">signed in</a> administrator <a href="/forum/create_account.php">to create a category.</a>! </h3> ';
 }
 include 'views/footer.php';
 ?>

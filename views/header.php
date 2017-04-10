@@ -22,6 +22,7 @@
               <li class="active"><a href="landing_page.php">WriteNow Forum</a></li>
               <li><a href="create_cat.php">Categories</a></li>
               <li><a href="create_topic.php">Topics</a></li>
+              <li><a href="account.php">Account</a></li>
             </ul>
         </nav>
       </div>

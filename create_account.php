@@ -41,6 +41,12 @@ else
         $errors[] = 'The password field cannot be empty.';
     }
 
+        if(!isset($_POST['security_answer']))
+        {
+
+            $errors[] = 'The security question must be answered.';
+        }
+
     if(!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/
     {
         echo 'Uh-oh.. a couple of fields are not filled in correctly..';
@@ -58,11 +64,11 @@ else
         $Surname=$conn->real_escape_string($_POST['Surname']);
         $password=$conn->real_escape_string(sha1($_POST['user_password']));
         $user_email=$conn->real_escape_string($_POST['user_email']);
-
+        $security_answer=$conn->real_escape_string($_POST['security_answer']);
 
         $sql = "INSERT INTO
-                    users(user_name, user_password, user_email ,user_date, user_level,  fname, surname)
-                VALUES('$user_name', '$password', '$user_email', NOW(), 0, '$Fname', '$Surname')";
+                    users(user_name, user_password, user_email ,user_date, user_level,  fname, surname, securityQ)
+                VALUES('$user_name', '$password', '$user_email', NOW(), 0, '$Fname', '$Surname', '$security_answer')";
 
         if(query($conn,$sql)==1)
         {
@@ -70,9 +76,17 @@ else
         }
         else
         {
+          //Check is user name is free.
+          $error = mysqli_error($conn);
+          if ($error == "Duplicate entry '$user_name' for key 'user_name_UNIQUE'"){
+          echo 'User name is already in use, plese try something else';
+        }
+          else{
             //something went wrong, display the error
             echo 'Something went wrong while registering. Please try again later.';
-            //echo mysql_error(); //debugging purposes, uncomment when needed
+            // '$error = mysqli_error($conn)'; //debugging purposes, uncomment when needed
+
+          }
         }
     }
 }

@@ -4,6 +4,7 @@ include 'connect.php';
 include 'views/header.php';
 include 'functions/helperFunctionsDatabase.php';
 include 'functions/helperFunctionsTables.php';
+
 unset($_SESSION['loggedin']);
 $_SESSION['loggedin'] = "false";
 
